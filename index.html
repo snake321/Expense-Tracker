@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense Tracker</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      .container {
+        padding-top: 3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+        overflow-x: hidden;
+      }
+      .heading,
+      .sub_heading {
+        color: #212529;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+          Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue",
+          sans-serif;
+        margin-bottom: 1rem;
+      }
+      .heading {
+        font-size: 3rem;
+      }
+      .sub_heading {
+        font-size: 2rem;
+        color: #38b000;
+        font-weight: bold;
+      }
+      form {
+        font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+          "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+      }
+      .input_container {
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0% 10%;
+      }
+      label {
+        margin-left: 1rem;
+        /* display: inline-block; */
+        text-align: right;
+        width: 100px;
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+      #name {
+        width: 75rem;
+        padding: 0.5rem 0rem 1rem 0.5rem;
+        font-size: 1.5rem;
+      }
+
+      #date {
+        font-size: 1.5rem;
+        cursor: pointer;
+        padding: 0.5rem 2rem 1rem 0.5rem;
+        margin-left: 1rem;
+        width: 100%;
+      }
+      .datesss {
+        width: 100%;
+        position: relative;
+      }
+
+      .datesss label {
+        position: absolute;
+        left: -110px;
+        top: 10px;
+        font-size: 1.5rem;
+      }
+      #num {
+        width: 100%;
+        padding: 0.5rem 0rem 1rem 0.5rem;
+        font-size: 1.5rem;
+      }
+      .btn {
+        cursor: pointer;
+        margin-top: 3rem;
+        font-size: 1.5rem;
+        padding: 0.5rem 2rem;
+        background-color: #38b000;
+        color: #fff;
+        border-radius: 1rem;
+        outline: none;
+        border: none;
+      }
+      .flex {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        justify-content: space-around;
+        padding-top: 2rem;
+      }
+      .table_container {
+        margin: 0% 10%;
+        width: 100%;
+        padding-top: 3rem;
+      }
+      table {
+        width: 80%;
+
+        margin: 0% 10%;
+      }
+      th {
+        border: 1px solid #ccd5ae;
+        padding: 1rem;
+        border-spacing: 0;
+        font-size: 1.5rem;
+        font-family: "Courier New", Courier, monospace;
+        text-align: left;
+      }
+      td {
+        border: 1px solid #ccd5ae;
+        padding: 0.8rem;
+        margin: 0;
+        text-align: left;
+        font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+          "Lucida Sans", Arial, sans-serif;
+        letter-spacing: 2px;
+        background-color: #dbdcdd9d;
+      }
+      .fa-solid {
+        font-size: 2rem;
+        cursor: pointer;
+        /* color:  */
+      }
+      .fa-solid:hover {
+        color: #38b000;
+      }
+    </style>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <main class="container">
+      <h1 class="heading">Expense Tracker</h1>
+      <h2 class="sub_heading">Add A New Item</h2>
+      <div class="input_container">
+        <form id="Expense" onsubmit="ExpenseTracker();return false">
+          <label for="name"> Name: </label>
+          <input
+            type="text"
+            name="name"
+            required
+            id="name"
+            placeholder="Where was the Expense made"
+          />
+          <div class="flex">
+            <div class="datesss">
+              <label for="name"> Date:</label>
+              <input
+                type="date"
+                name="add_date"
+                required
+                id="date"
+                placeholder=""
+              />
+            </div>
+            <label for="name"> Amount: </label>
+            <input type="number" required id="num" />
+          </div>
+          <!-- <div class="conbtn"> -->
+          <input type="submit" name="submit" value="submit" class="btn" />
+
+          <!-- </div> -->
+        </form>
+      </div>
+      <div class="table_container">
+        <table cellspacing="0">
+          <tr>
+            <thead>
+              <th>Name</th>
+              <th>Date</th>
+              <th>Amount</th>
+              <th></th>
+            </thead>
+          </tr>
+
+          <tbody class="tablelist">
+            <tr class="col_1">
+              <td colspan="4">No Expenses Added Yet!</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+    <script>
+      const ExpenseTracker = (form) => {
+        let name = document.getElementById("name").value;
+        let date = document.getElementById("date").value;
+        let col1 = document.querySelector(".col_1");
+        let num = document.getElementById("num").value;
+        let table = document.querySelector(".tablelist");
+        let tr = document.createElement("tr");
+        table.appendChild(tr);
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+        let td3 = document.createElement("td");
+        let td4 = document.createElement("td");
+
+        // (tr.textContent = name), date, num;
+        tr.appendChild(td1);
+        tr.appendChild(td2);
+        tr.appendChild(td3);
+        tr.appendChild(td4);
+        td1.innerHTML = `${name}`;
+        td2.innerHTML = `${date}`;
+        td3.innerHTML = `$${num}`;
+        td4.innerHTML = `<i class="fa-solid fa-square-xmark"></i>`;
+
+        let cross = document.querySelectorAll(".fa-square-xmark");
+        cross.forEach(function (i) {
+          i.addEventListener("click", function (e) {
+            // so This is how  we delete parent node by clicking on button
+            e.stopImmediatePropagation();
+            tr.remove(e.target);
+          });
+        });
+
+        let deladd = () => {
+          if (form === false) {
+            col1.innerHTML = col1.style.display = "none";
+          } else {
+            col1.innerHTML = col1.style.display = "block";
+          }
+          if (col1.length === tr.length) {
+            col1.innerHTML = col1.style.display = "none";
+          } else {
+            col1.innerHTML = col1.style.display = "block";
+          }
+        };
+        deladd();
+      };
+    </script>
+  </body>
+</html>
